@@ -20,7 +20,7 @@ public class mapManagers: NSObject , CLLocationManagerDelegate,GMSMapViewDelegat
     /// This variable is used to store all marker
     var markersArray = [GMSMarker]()
     /// This variable is used to store all getuserDict from json
-    var getuserDict: [[String: String]] = []
+   public var getuserDict: [[String: String]] = []
     /// This variable is used to store only the user within the given radius
     var  visibleUser = [[String: String]]()
     /// This variable is used to store the current location of the user
