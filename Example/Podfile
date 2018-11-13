@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'NearbyUserdetails_Example' do
+  pod 'NearbyUserdetails', :path => '../'
+
+  target 'NearbyUserdetails_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end
