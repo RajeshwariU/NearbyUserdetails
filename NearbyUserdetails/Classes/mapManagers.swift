@@ -10,7 +10,7 @@ import CoreLocation
 import GoogleMaps
 import SDWebImage
 
-class mapManagers: NSObject , CLLocationManagerDelegate,GMSMapViewDelegate {
+public class mapManagers: NSObject , CLLocationManagerDelegate,GMSMapViewDelegate {
     /// This variable is for CLLocationManager
     let locationManager = CLLocationManager()
     /// This variable stores the radius in string
