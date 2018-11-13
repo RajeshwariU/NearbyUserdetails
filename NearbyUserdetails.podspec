@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'NearbyUserdetails'
-  s.version          = '0.1.1'
+  s.version          = '0.1.2'
   s.summary          = 'Used to find the nearby users.'
 
 # This description is used to generate tags and improve search results.
@@ -29,7 +29,7 @@ TODO: This library is used to find the nearByUsers from your current location.
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
   s.ios.deployment_target = '8.0'
-
+  s.static_framework = true
   s.source_files = 'NearbyUserdetails/Classes/**/*'
   
   # s.resource_bundles = {
