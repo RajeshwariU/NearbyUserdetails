@@ -16,11 +16,11 @@ public class mapManagers: NSObject , CLLocationManagerDelegate,GMSMapViewDelegat
     /// This variable stores the radius in string
     var radiusString = String()
     /// This variable is for GMSMapView
-    var setGoogleMaps = GMSMapView()
+    //    var setGoogleMaps = GMSMapView()
     /// This variable is used to store all marker
     var markersArray = [GMSMarker]()
     /// This variable is used to store all getuserDict from json
-   public var getuserDict: [[String: String]] = []
+    public var getuserDict: [[String: String]] = []
     /// This variable is used to store only the user within the given radius
     var  visibleUser = [[String: String]]()
     /// This variable is used to store the current location of the user
@@ -28,11 +28,9 @@ public class mapManagers: NSObject , CLLocationManagerDelegate,GMSMapViewDelegat
     
     
     // MARK: - CLLocationManager Delegates
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        setGoogleMaps.clear()
+    private func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        //        setGoogleMaps.clear()
         locationManager.stopUpdatingLocation()
-        let location = locationManager.location?.coordinate
-        cameraMoveToLocation(toLocation: location)
     }
     
     // MARK: - Public methods
@@ -42,26 +40,30 @@ public class mapManagers: NSObject , CLLocationManagerDelegate,GMSMapViewDelegat
     /// - Parameters:
     ///   - getRadius: get radius from user to display there contact within the radius
     ///   - googleMapView: GMSMapView
-    public func initLocationManagerWithRadiusAndMap(getRadius: String, googleMapView: GMSMapView)
+    public func initLocationManagerWithRadiusAndMap(getRadius: String, googleMapView: GMSMapView) -> GMSMapView
     {
         // Ask for Authorisation from the User.
         locationManager.requestWhenInUseAuthorization()
         if CLLocationManager.locationServicesEnabled() {
-            setGoogleMaps.delegate = self
+            googleMapView.delegate = self
             locationManager.delegate = self
             locationManager.desiredAccuracy = kCLLocationAccuracyBest
             locationManager.distanceFilter = 10
             locationManager.startUpdatingLocation()
             locationManager.startMonitoringSignificantLocationChanges()
             radiusString = getRadius
-            setGoogleMaps = googleMapView
+            //            setGoogleMaps = googleMapView
+            let location = locationManager.location?.coordinate
+            cameraMoveToLocation(toLocation: location, googleMapView: googleMapView)
+            
         }
+        return googleMapView
     }
     
     /// This is used to zoom the user currentLocation with radius using GMSCircle
     ///
     /// - Parameter toLocation: CLLocationCoordinate2D
-    public func cameraMoveToLocation(toLocation: CLLocationCoordinate2D?) {
+    public func cameraMoveToLocation(toLocation: CLLocationCoordinate2D?, googleMapView: GMSMapView) {
         if toLocation != nil {
             currentLocationCoordinates = toLocation!
             var toMeter : Double  = Double(radiusString)!
@@ -72,10 +74,10 @@ public class mapManagers: NSObject , CLLocationManagerDelegate,GMSMapViewDelegat
             circle.position = toLocation! // Your CLLocationCoordinate2D  position
             circle.strokeWidth = 0.2;
             circle.strokeColor = UIColor.lightGray
-            circle.map = setGoogleMaps;
+            circle.map = googleMapView;
             // Add it to the map
             circle.map?.camera = GMSCameraPosition.camera(withTarget: toLocation!, zoom: currentZoom)
-            setMarkerForAllNearByUsers(userInformation: getuserDict)
+            setMarkerForAllNearByUsers(userInformation: getuserDict, googleMapView: googleMapView)
             print(currentZoom)
         }
     }
@@ -99,7 +101,7 @@ public class mapManagers: NSObject , CLLocationManagerDelegate,GMSMapViewDelegat
     /// This method is to set custom marker for all nearby users
     ///
     /// - Parameter userInformation: this dictionary contains all user information from json
-    func setMarkerForAllNearByUsers(userInformation: [[String: String]])
+    func setMarkerForAllNearByUsers(userInformation: [[String: String]],googleMapView: GMSMapView)
     {
         visibleUser .removeAll()
         markersArray.removeAll()
@@ -129,7 +131,7 @@ public class mapManagers: NSObject , CLLocationManagerDelegate,GMSMapViewDelegat
                 let markerIcon: UIImage? = image(from: view)
                 user_marker.icon = markerIcon
                 user_marker.position = CLLocationCoordinate2D(latitude: latitudess, longitude: longitudess)
-                user_marker.map = setGoogleMaps
+                user_marker.map = googleMapView
                 markersArray .append(user_marker)
                 visibleUser.append(user)
                 print(markersArray.count)
@@ -156,7 +158,7 @@ public class mapManagers: NSObject , CLLocationManagerDelegate,GMSMapViewDelegat
     }
     
     // MARK: - GMSMapView Delegates
-    func mapView(_ mapView: GMSMapView, didChange position: GMSCameraPosition) {
+    private func mapView(_ mapView: GMSMapView, didChange position: GMSCameraPosition) {
         currentZoom = mapView.camera.zoom
     }
 }
