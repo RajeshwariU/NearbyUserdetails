@@ -117,11 +117,11 @@ class mapManagers: NSObject , CLLocationManagerDelegate,GMSMapViewDelegate {
                 let user_marker = GMSMarker()
                 let view = UIView(frame: CGRect(x: 0, y: 0, width: 70, height: 70))
                 let pinImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 70, height: 70))
-                pinImageView.image = UIImage(named: "themeLocation")
+                pinImageView.image = UIImage(named: "pin.png")
                 let groupImage = UIImageView(frame: CGRect(x: 15, y: 4, width: 40, height: 40))
                 groupImage.backgroundColor = UIColor.lightGray
                 let userProfile = user[kUserImage]
-                groupImage.sd_setImage(with: URL(string: userProfile!), placeholderImage: UIImage(named: "userImage"))
+                groupImage.sd_setImage(with: URL(string: userProfile!), placeholderImage: UIImage(named: "user.png"))
                 view.addSubview(pinImageView)
                 groupImage.layer.cornerRadius = 21
                 groupImage.layer.masksToBounds = true
