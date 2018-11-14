@@ -20,15 +20,15 @@ public class mapManagers: NSObject , CLLocationManagerDelegate,GMSMapViewDelegat
     /// This variable is used to store all marker
     var markersArray = [GMSMarker]()
     /// This variable is used to store all user informatiom from json/api
-    @objc public var userInformation: [[String: String]] = []
+    public var userInformation: [[String: String]] = []
     /// This variable is used to store only the user within the given radius
     var  visibleUser = [[String: String]]()
     /// This variable is used to store the current location of the user
     var  currentLocationCoordinates = CLLocationCoordinate2D()
     /// This variable is used set custom marker image
-    @objc public var pinImage = UIImage()
+    public var pinImage = UIImage()
     /// This variable is used to placeholder image
-    @objc public var userPlaceholderImage = UIImage()
+    public var userPlaceholderImage = UIImage()
     /// This variable is used to store the zoom value of the map
     var currentZoom : Float = Float()
     
@@ -48,7 +48,7 @@ public class mapManagers: NSObject , CLLocationManagerDelegate,GMSMapViewDelegat
     /// - Parameters:
     ///   - getRadius: get radius from user to display there contact within the radius
     ///   - googleMapView: GMSMapView
-    @objc public func initLocationManagerWithRadiusAndMap(getRadius: String, googleMapView: GMSMapView) -> GMSMapView
+    public func initLocationManagerWithRadiusAndMap(getRadius: String, googleMapView: GMSMapView) -> GMSMapView
     {
         // Ask for Authorisation from the User.
         locationManager.requestWhenInUseAuthorization()
@@ -71,7 +71,7 @@ public class mapManagers: NSObject , CLLocationManagerDelegate,GMSMapViewDelegat
     ///
     /// - Parameter toLocation: CLLocationCoordinate2D
     /// - googleMapView: GMSMapView
-    @objc public func cameraMoveToLocation(toLocation: CLLocationCoordinate2D?, googleMapView: GMSMapView) {
+     public func cameraMoveToLocation(toLocation: CLLocationCoordinate2D?, googleMapView: GMSMapView) {
         if toLocation != nil {
             currentLocationCoordinates = toLocation!
             var toMeter : Double  = Double(radiusString)!
@@ -99,13 +99,13 @@ public class mapManagers: NSObject , CLLocationManagerDelegate,GMSMapViewDelegat
     /// This method is to get all users within the radius
     ///
     /// - Returns: value in [[String: String]]
-    @objc public func getAllVisibleUserFromRadius() -> [[String: String]] {
+    public func getAllVisibleUserFromRadius() -> [[String: String]] {
         return visibleUser
     }
     /// This method is to get all markers within the radius
     ///
     /// - Returns: GMSMarker
-    @objc public func getAllVisibleMarkerFromRadius() -> [GMSMarker] {
+    public func getAllVisibleMarkerFromRadius() -> [GMSMarker] {
         return markersArray
     }
     
