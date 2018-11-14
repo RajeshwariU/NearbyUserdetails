@@ -29,36 +29,36 @@ pod 'NearbyUserdetails'
 ```
 ## Usage
 
-import NearbyUser
+`import NearbyUser`
 
-1.Create object for mapManagers class[which is in pod] 
-Example:
-var mapObject = mapManagers()
+1.Create object for mapManagers class[which is in pod]__   
+Example:__  
+var mapObject = mapManagers() 
 
-2.mapManagers class has below method with returntype of GMSMapView
-public func initLocationManagerWithRadiusAndMap(getRadius: String, googleMapView: GMSMapView) -> GMSMapView
-{
-    return GMSMapView
-}
-usage of the above method is:
-gMap = mapObject.initLocationManagerWithRadiusAndMap(getRadius: "yourradiusvalue", googleMapView: gMap)
+2.mapManagers class has below method with returntype of GMSMapView__
+public func initLocationManagerWithRadiusAndMap(getRadius: String, googleMapView: GMSMapView) -> GMSMapView__
+{__
+    return GMSMapView__
+}__
+usage of the above method is:__
+`gMap = mapObject.initLocationManagerWithRadiusAndMap(getRadius: "yourradiusvalue", googleMapView: gMap)`__
 (in viewDidLoad or wherever based on your preference)
 
-3.mapManagers class has following variables:
-/// This variable is used to store all user informatiom from json/api
-public var userInformation: [[String: String]] = []
-/// This variable is used set custom marker image
-public var pinImage = UIImage()
-/// This variable is used for placeholder image inside the pin image 
+3.mapManagers class has following variables:__
+/// This variable is used to store all user informatiom from json/api__
+public var userInformation: [[String: String]] = []__
+/// This variable is used set custom marker image__
+public var pinImage = UIImage()__
+/// This variable is used for placeholder image inside the pin image__ 
 public var userPlaceholderImage = UIImage()
 
-usage of the above variables is:
-mapObject.userInformation = "yourData from api/json"
-mapObject.pinImage = UIImage(named: "yourImage")!
-mapObject.userPlaceholderImage = UIImage(named: "yourImage")!
+usage of the above variables is:__
+`mapObject.userInformation = "yourData from api/json"`__
+`mapObject.pinImage = UIImage(named: "yourImage")!`__
+`mapObject.userPlaceholderImage = UIImage(named: "yourImage")!`
 
-Note:
-gMap - outlet of your GMSMapView[used in your project]
+Note:__
+gMap - outlet of your GMSMapView[used in your project]__
 mapObject - instance of mapManagers class
 
 ## Author
