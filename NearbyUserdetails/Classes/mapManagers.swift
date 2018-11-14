@@ -19,21 +19,29 @@ public class mapManagers: NSObject , CLLocationManagerDelegate,GMSMapViewDelegat
     //    var setGoogleMaps = GMSMapView()
     /// This variable is used to store all marker
     var markersArray = [GMSMarker]()
-    /// This variable is used to store all getuserDict from json
-    public var getuserDict: [[String: String]] = []
+    /// This variable is used to store all user informatiom from json/api
+    public var userInformation: [[String: String]] = []
     /// This variable is used to store only the user within the given radius
     var  visibleUser = [[String: String]]()
     /// This variable is used to store the current location of the user
     var  currentLocationCoordinates = CLLocationCoordinate2D()
+    /// This variable is used set custom marker image
+    public var pinImage = UIImage()
+    /// This variable is used to placeholder image
+    public var userPlaceholderImage = UIImage()
+    /// This variable is used to store the zoom value of the map
+    var currentZoom : Float = Float()
+    
     
     
     // MARK: - CLLocationManager Delegates
     private func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        //        setGoogleMaps.clear()
         locationManager.stopUpdatingLocation()
+        locationManager.startUpdatingLocation()
     }
     
     // MARK: - Public methods
+    
     
     /// This method is used to initiate locationManager
     ///
@@ -52,7 +60,6 @@ public class mapManagers: NSObject , CLLocationManagerDelegate,GMSMapViewDelegat
             locationManager.startUpdatingLocation()
             locationManager.startMonitoringSignificantLocationChanges()
             radiusString = getRadius
-            //            setGoogleMaps = googleMapView
             let location = locationManager.location?.coordinate
             cameraMoveToLocation(toLocation: location, googleMapView: googleMapView)
             
@@ -63,6 +70,7 @@ public class mapManagers: NSObject , CLLocationManagerDelegate,GMSMapViewDelegat
     /// This is used to zoom the user currentLocation with radius using GMSCircle
     ///
     /// - Parameter toLocation: CLLocationCoordinate2D
+    /// - googleMapView: GMSMapView
     public func cameraMoveToLocation(toLocation: CLLocationCoordinate2D?, googleMapView: GMSMapView) {
         if toLocation != nil {
             currentLocationCoordinates = toLocation!
@@ -75,9 +83,14 @@ public class mapManagers: NSObject , CLLocationManagerDelegate,GMSMapViewDelegat
             circle.strokeWidth = 0.2;
             circle.strokeColor = UIColor.lightGray
             circle.map = googleMapView;
+            currentZoom = googleMapView.camera.zoom
+            if currentZoom <= 4.0
+            {
+                currentZoom = 10.0
+            }
             // Add it to the map
             circle.map?.camera = GMSCameraPosition.camera(withTarget: toLocation!, zoom: currentZoom)
-            setMarkerForAllNearByUsers(userInformation: getuserDict, googleMapView: googleMapView)
+            setMarkerForAllNearByUsers(userInformation: userInformation, googleMapView: googleMapView)
             print(currentZoom)
         }
     }
@@ -101,11 +114,12 @@ public class mapManagers: NSObject , CLLocationManagerDelegate,GMSMapViewDelegat
     /// This method is to set custom marker for all nearby users
     ///
     /// - Parameter userInformation: this dictionary contains all user information from json
+    /// - googleMapView: GMSMapView
     func setMarkerForAllNearByUsers(userInformation: [[String: String]],googleMapView: GMSMapView)
     {
         visibleUser .removeAll()
         markersArray.removeAll()
-        for user in getuserDict {
+        for user in userInformation {
             let userLat = user[kLatitude]
             let userLon = user[kLongitude]
             let latitudess = (userLat as NSString?)!.doubleValue
@@ -119,11 +133,11 @@ public class mapManagers: NSObject , CLLocationManagerDelegate,GMSMapViewDelegat
                 let user_marker = GMSMarker()
                 let view = UIView(frame: CGRect(x: 0, y: 0, width: 70, height: 70))
                 let pinImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 70, height: 70))
-                pinImageView.image = UIImage(named: "pin.png")
+                pinImageView.image = pinImage
                 let groupImage = UIImageView(frame: CGRect(x: 15, y: 4, width: 40, height: 40))
                 groupImage.backgroundColor = UIColor.lightGray
                 let userProfile = user[kUserImage]
-                groupImage.sd_setImage(with: URL(string: userProfile!), placeholderImage: UIImage(named: "user.png"))
+                groupImage.sd_setImage(with: URL(string: userProfile!), placeholderImage: userPlaceholderImage)
                 view.addSubview(pinImageView)
                 groupImage.layer.cornerRadius = 21
                 groupImage.layer.masksToBounds = true
@@ -155,10 +169,5 @@ public class mapManagers: NSObject , CLLocationManagerDelegate,GMSMapViewDelegat
         let image: UIImage? = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         return image
-    }
-    
-    // MARK: - GMSMapView Delegates
-    private func mapView(_ mapView: GMSMapView, didChange position: GMSCameraPosition) {
-        currentZoom = mapView.camera.zoom
     }
 }

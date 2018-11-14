@@ -32,9 +32,9 @@ TODO: This library is used to find the nearByUsers from your current location.
   s.static_framework = true
   s.source_files = 'NearbyUserdetails/Classes/**/*'
   
-   s.resource_bundles = {
-     'NearbyUserdetails' => ['NearbyUserdetails/Assets/*.png']
-   }
+  #s.resource_bundles = {
+  #  'NearbyUserdetails' => ['NearbyUserdetails/Assets/*.png']
+  # }
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
   # s.frameworks = 'UIKit', 'MapKit'
