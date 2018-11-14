@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'NearbyUserdetails'
-  s.version          = '0.1.7'
+  s.version          = '0.1.8'
   s.summary          = 'Used to find the nearby users.'
 
 # This description is used to generate tags and improve search results.
@@ -37,7 +37,7 @@ TODO: This library is used to find the nearByUsers from your current location.
   # }
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
-  # s.frameworks = 'UIKit', 'MapKit'
+  s.frameworks = 'UIKit', 'Foundation', 'CoreLocation'
   s.dependency 'GoogleMaps'
   s.dependency 'GooglePlaces'
   s.dependency 'SDWebImage', '~> 4.0'
