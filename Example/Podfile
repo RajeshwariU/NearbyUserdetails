@@ -1,5 +1,4 @@
 use_frameworks!
-use_modular_headers!
 
 target 'NearbyUserdetails_Example' do
   pod 'NearbyUserdetails', :path => '../'
