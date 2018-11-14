@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'NearbyUserdetails'
-  s.version          = '0.2.1'
+  s.version          = '0.2.2'
   s.summary          = 'Used to find the nearby users.'
 
 # This description is used to generate tags and improve search results.
@@ -32,7 +32,7 @@ TODO: This library is used to find the nearByUsers from your current location.
   s.static_framework = true
   s.source_files = 'NearbyUserdetails/Classes/**/*'
   #s.pod_target_xcconfig = {"modular_headers" => "true" }
-  s.swift_version = '>= 3.2'
+  
 
   #s.resource_bundles = {
   #  'NearbyUserdetails' => ['NearbyUserdetails/Assets/*.png']
