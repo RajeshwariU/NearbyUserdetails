@@ -31,11 +31,11 @@ pod 'NearbyUserdetails'
 
 - Objective C
 
-`#import "NearbyUser-Swift.h"`
+`#import "NearbyUserdetails-Swift.h"`
 
 - Swift
 
-`import NearbyUser`
+`import NearbyUserdetails`
 
 ###### How to use
 

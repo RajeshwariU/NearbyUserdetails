@@ -469,6 +469,11 @@
 			baseConfigurationReference = 9292C9331C0D1C19010285F7 /* Pods-NearbyUserdetails_Example.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/NearbyUserdetails\"",
+					"$(SRCROOT)",
+				);
 				INFOPLIST_FILE = NearbyUserdetails/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleApp;
@@ -484,6 +489,11 @@
 			baseConfigurationReference = D155D473E66694AC923B1351 /* Pods-NearbyUserdetails_Example.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/NearbyUserdetails\"",
+					"$(SRCROOT)",
+				);
 				INFOPLIST_FILE = NearbyUserdetails/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleApp;
