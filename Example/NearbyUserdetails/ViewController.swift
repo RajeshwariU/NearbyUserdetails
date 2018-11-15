@@ -10,7 +10,6 @@ import UIKit
 import NearbyUserdetails
 
 class ViewController: UIViewController {
-    var map = mapManagers()
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
