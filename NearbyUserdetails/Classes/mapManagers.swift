@@ -49,7 +49,7 @@ import SDWebImage
     ///   - getRadius: get radius from user to display there contact within the radius
     ///   - googleMapView: GMSMapView
     @objc(initLocationManagerWithRadiusAndMap: :)
-    public func initLocationManagerWithRadiusAndMap(getRadius: String, googleMapView: GMSMapView) -> GMSMapView
+    @objc public func initLocationManagerWithRadiusAndMap(getRadius: String, googleMapView: GMSMapView) -> GMSMapView
     {
         // Ask for Authorisation from the User.
         locationManager.requestWhenInUseAuthorization()
